@@ -10,8 +10,8 @@ jobs:
   
   installation :
     runs-on: ubuntu-latest
+      
     steps:
-      Pre-requisite:
         - name : check repo
           uses : actions/checkout@V3
       
@@ -41,9 +41,8 @@ jobs:
         - name: check dot net version
           run: dotnet --version
 
-      build:
-       - name: build and create new folder
-         run: |
+        - name: build dotnet            
+          run: |
             dotnet build --configuration Release
             dotnet publish -c Release -o OutputFolder
     
