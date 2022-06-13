@@ -1,0 +1,41 @@
+name: Dotnet Build Folder
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: Build dot Net
+
+jobs:
+  
+  installation :
+    runs-on: ubuntu-latest
+    steps:
+      Pre-requisite:
+        - name : check repo
+        - uses : actions/checkout@V3
+      
+        - name: install dotnet
+        - run: wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb rm packages-microsoft-prod.deb
+
+        - run: sudo apt-get update; \
+        sudo apt-get install -y apt-transport-https && \
+        sudo apt-get update && \
+        sudo apt-get install -y dotnet-sdk-6.0
+        
+        - run: sudo apt-get update; \
+  sudo apt-get install -y apt-transport-https && \
+  sudo apt-get update && \
+  sudo apt-get install -y aspnetcore-runtime-6.0
+  
+        - run: sudo apt-get install -y dotnet-runtime-6.0
+
+        - name: check dot net version
+          run: dotnet --version
+
+      build:
+       - name: build and create new folder
+         run: dotnet build --configuration Release
+         run: dotnet publish -c Release -o OutputFolder
+    
