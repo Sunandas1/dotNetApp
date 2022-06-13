@@ -2,12 +2,8 @@ name: Dotnet Build Folder
 
 on:
   workflow_dispatch:
-    inputs:
-      name:
-        description: Build dot Net
-
-jobs:
   
+jobs:
   installation :
     runs-on: ubuntu-latest
       
@@ -22,21 +18,21 @@ jobs:
               rm packages-microsoft-prod.deb
           
         - name: install SDK
-        - run: |
+          run: |
             sudo apt-get update; \
             sudo apt-get install -y apt-transport-https && \
             sudo apt-get update && \
             sudo apt-get install -y dotnet-sdk-6.0
         
         - name: install runtime
-        - run: |
+          run: |
               sudo apt-get update; \
               sudo apt-get install -y apt-transport-https && \
               sudo apt-get update && \
               sudo apt-get install -y aspnetcore-runtime-6.0
   
         - name: install dotnet
-        - run: sudo apt-get install -y dotnet-runtime-6.0
+          run: sudo apt-get install -y dotnet-runtime-6.0
 
         - name: check dot net version
           run: dotnet --version
