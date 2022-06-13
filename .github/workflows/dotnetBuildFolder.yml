@@ -4,12 +4,12 @@ on:
   workflow_dispatch:
   
 jobs:
-  installation :
+  build:
     runs-on: ubuntu-latest
       
     steps:
-        - name : check repo
-          uses : actions/checkout@V3
+        - name: check repo
+          uses: actions/checkout@V3
       
         - name: run dotnet bash
           run: |
