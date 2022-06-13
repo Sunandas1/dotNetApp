@@ -9,7 +9,7 @@ jobs:
       
     steps:
         - name: check repo
-          uses: actions/checkout@V3
+          uses: actions/checkout@v2
       
         - name: run dotnet bash
           run: |
