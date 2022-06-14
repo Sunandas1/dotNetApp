@@ -25,6 +25,9 @@ jobs:
       - name: Publish the Deployment Package in public folder
         run: dotnet publish -c Release -o public
 
+  deploy:
+    runs-on: iis-test-runner
+    steps:
       - name: Create a Artifact using from the public folder
         uses: actions/upload-artifact@v3
         with:
@@ -32,6 +35,6 @@ jobs:
           path: public
 
       - name: Copy folder from work directory to wwwroot
-        run: Xcopy /E /I C:\Users\actions-runner\_work\dotNetApp\dotNetApp\public C:\inetpub\wwwroot\ /Y
+        run: xcopy /E /C /R /Y .\public\* C:\inetpub\wwwroot\
 
                
