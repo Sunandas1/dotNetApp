@@ -32,6 +32,6 @@ jobs:
           path: public
 
       - name: Copy folder from work directory to wwwroot
-        run: Xcopy /E /C /R ./public/* C:\inetpub\wwwroot\ /Y
+        run: xcopy /E /C /R /Y .\public\* C:\inetpub\wwwroot\
 
                
