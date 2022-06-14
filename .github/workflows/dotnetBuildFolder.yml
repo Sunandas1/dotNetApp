@@ -1,0 +1,50 @@
+name: Dotnet Build Folder
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+      
+    steps:
+        - name: check repo
+          uses: actions/checkout@v2
+      
+        - name: run dotnet bash
+          run: |
+              wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+              sudo dpkg -i packages-microsoft-prod.deb
+              rm packages-microsoft-prod.deb
+          
+        - name: install SDK
+          run: |
+            sudo apt-get update; \
+            sudo apt-get install -y apt-transport-https && \
+            sudo apt-get update && \
+            sudo apt-get install -y dotnet-sdk-6.0
+        
+        - name: install runtime
+          run: |
+              sudo apt-get update; \
+              sudo apt-get install -y apt-transport-https && \
+              sudo apt-get update && \
+              sudo apt-get install -y aspnetcore-runtime-6.0
+  
+        - name: install dotnet
+          run: sudo apt-get install -y dotnet-runtime-6.0
+
+        - name: check dot net version
+          run: dotnet --version
+
+        - name: build dotnet            
+          run: |
+            dotnet build --configuration Release
+            dotnet publish -c Release -o OutputFolder
+            
+        - name: create artifact
+          uses: actions/upload-artifact@v3
+          with:
+            name: Here is artifact!
+            path: OutputFolder
+    
