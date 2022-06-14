@@ -6,7 +6,7 @@ on:
 jobs:
   build:
     runs-on: iis-test-runner
-      steps:
+    steps:
 
       - name: Checkout of the Code
         uses: actions/checkout@v3
