@@ -30,3 +30,6 @@ jobs:
         with:
           name: public-folder-to-be-deployed-to-iis
           path: public
+
+      - name: Copy folder
+        run: xcopy ./public/* C:/inetpub/wwwroot/
