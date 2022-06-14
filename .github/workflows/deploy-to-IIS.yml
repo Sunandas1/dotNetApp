@@ -40,5 +40,14 @@ jobs:
           iisreset /stop
           Copy-Item ./public/* C:/inetpub/wwwroot/ -Recurse -Force
           iisreset /start
+      - name: copy public folder in Jfrog
+        action: "Upload a file to Artifactory" {
+  uses = "greenido/upload-to-artifactory@master"
+  secrets = ["USERNAME","PASSWORD"]
+  args = {ARTIFACTORY_URL = "https://sunartifact.jfrog.io/artifactory/default-docker-virtual/",
+  REPO_NAME = "public folder",FILE_PATH = "public",FILE_NAME = "*"
+  }
+}
+      
 
                
