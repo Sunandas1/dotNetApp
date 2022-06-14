@@ -35,6 +35,10 @@ jobs:
           path: public
 
       - name: Copy folder from work directory to wwwroot
-        run: xcopy /E /C /R /Y .\public\* C:\inetpub\wwwroot\
+        #run: xcopy /E /C /R /Y .\public\* C:\inetpub\wwwroot\
+        run: |
+          iisreset /stop
+          Copy-Item ./public/* C:/inetpub/wwwroot/ -Recurse -Force
+          iisreset /start
 
                
