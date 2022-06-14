@@ -45,6 +45,6 @@ jobs:
         - name: create artifact
           uses: actions/upload-artifact@v3
           with:
-            name: folder that should come here
+            name: Here is artifact!
             path: OutputFolder
     
