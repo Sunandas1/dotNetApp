@@ -6,7 +6,7 @@ on:
 jobs:
   build:
     runs-on: iis-test-runner
-      steps:
+    steps:
 
       - name: Checkout of the Code
         uses: actions/checkout@v3
@@ -32,4 +32,6 @@ jobs:
           path: public
 
       - name: Copy folder from work directory to wwwroot
-        run: Xcopy /E /I C:\Users\actions-runner\_work\dotNetApp\dotNetApp\public C:\inetpub\wwwroot\
+        run: |
+          Xcopy /E /I C:\Users\actions-runner\_work\dotNetApp\dotNetApp\public C:\inetpub\wwwroot\
+          Yes
