@@ -1,1 +1,55 @@
+name: deploy folder in Jfrog
 
+on:
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout of the Code
+        uses: actions/checkout@v3
+
+      - name: Install .NET Environment
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '6.0.300'
+
+      - name: Verify the .NET Installation
+        run: dotnet --version
+
+      - name: Build the Application with .NET
+        run: dotnet build --configuration Release
+
+      - name: Publish the Deployment Package in public folder
+        run: dotnet publish -c Release -o public
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create a Artifact using from the public folder
+        uses: actions/upload-artifact@v3
+        with:
+          name: public folder
+          path: public
+
+      - name: Zip the public folder
+        run: zip -r public.zip public/
+
+      - name: Check Weather Zip Folder is created or not
+        run: ls -l public.zip
+          
+  JfrogArtifact-Upload:
+      runs-on: ubuntu-latest
+      needs: deploy
+      steps:
+        - name: Upload to Artifact
+          run: curl -H "X-JFrog-Art-Api:${secrets.jfrogkey}" -T public.zip "https://sunartifact.jfrog.io/artifactory/sunartifact-generic-local/${GITHUB_RUN_ID}"
+        
+      
+  
+      
+        
+
+               
