@@ -22,27 +22,28 @@ jobs:
       - name: Build the Application with .NET
         run: dotnet build --configuration Release
 
+      
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs:  build
+    steps:
+    
       - name: Publish the Deployment Package in public folder
         run: dotnet publish -c Release -o public
         
       - name: Zip the public folder
         run: zip -r public.zip public/
 
-      - name: Check Weather Zip Folder is created or not
-        run: ls -l public.zip
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs:  build
-    steps:
       - name: Create a Artifact using from the public folder
         uses: actions/upload-artifact@v3
         with:
           name: public folder
           path: public
+          
+      - name: Check Whether Zip Folder is created or not
+        run: ls -l public.zip
       
-        
-     
           
   JfrogArtifact-Upload:
       runs-on: ubuntu-latest
