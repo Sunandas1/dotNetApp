@@ -24,6 +24,12 @@ jobs:
 
       - name: Publish the Deployment Package in public folder
         run: dotnet publish -c Release -o public
+        
+      - name: Zip the public folder
+        run: zip -r public.zip public/
+
+      - name: Check Weather Zip Folder is created or not
+        run: ls -l public.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -34,14 +40,9 @@ jobs:
         with:
           name: public folder
           path: public
-      - name: CHECk FILE LIST
-        run: ls -la
+      
         
-      - name: Zip the public folder
-        run: zip -r public.zip public/
-
-      - name: Check Weather Zip Folder is created or not
-        run: ls -l public.zip
+     
           
   JfrogArtifact-Upload:
       runs-on: ubuntu-latest
