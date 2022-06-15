@@ -51,6 +51,9 @@ jobs:
       - name: check Jfrog version & config
         run:  jf -v
         
+      - name: remove alias
+        run: Remove-item alias:curl
+        
       - name: Upload zip file in Jfrog
         run: curl -H "X-JFrog-Art-Api:AKCp8mZHgrAyp3KxHTAsfpCQ7sXHx79o4BMyh8bWHRijWi1Hrnf2vdkmJJWoGqDNPBemvB4CR" -T C:\Users\Sunandas1\Downloads\public.zip "https://sunartifact.jfrog.io/artifactory/sunartifact-generic-local/public.zip"
         
