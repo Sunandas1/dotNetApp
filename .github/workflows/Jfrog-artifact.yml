@@ -21,13 +21,6 @@ jobs:
 
       - name: Build the Application with .NET
         run: dotnet build --configuration Release
-
-      
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs:  build
-    steps:
     
       - name: Publish the Deployment Package in public folder
         run: dotnet publish -c Release -o public
