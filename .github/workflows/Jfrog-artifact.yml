@@ -36,7 +36,7 @@ jobs:
           path: public
 
       - name: Zip the public folder
-        run: zip -r public.zip . -i public/
+        run: zip -r public.zip ./public/*
 
       - name: Check Weather Zip Folder is created or not
         run: ls -l public.zip
@@ -46,7 +46,7 @@ jobs:
       needs: deploy
       steps:
         - name: Upload to Artifact
-          run: curl -H "X-JFrog-Art-Api:${secrets.jfrogkey}" -T public.zip "https://sunartifact.jfrog.io/artifactory/sunartifact-generic-local/"'"$GITHUB_RUN_ID"'"
+          run: curl -H "X-JFrog-Art-Api:${secrets.jfrogkey}" -T public.zip "https://sunartifact.jfrog.io/artifactory/sunartifact-generic-local/$GITHUB_RUN_ID"
         
       
   
