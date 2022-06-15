@@ -35,7 +35,7 @@ jobs:
           path: public
 
       - name: Zip the public folder
-        run: zip -r public.zip public/
+        run: zip -r public.zip . -i public/
 
       - name: Check Weather Zip Folder is created or not
         run: ls -l public.zip
