@@ -45,7 +45,7 @@ jobs:
       needs: deploy
       steps:
         - name: Upload to Artifact
-          run: curl -H "X-JFrog-Art-Api:${secrets.jfrogkey}" -T public.zip "https://sunartifact.jfrog.io/artifactory/sunartifact-generic-local/${GITHUB_RUN_ID}"
+          run: curl -H "X-JFrog-Art-Api:${secrets.jfrogkey}" -T public.zip "https://sunartifact.jfrog.io/artifactory/sunartifact-generic-local/"'"${GITHUB_RUN_ID}"'"
         
       
   
