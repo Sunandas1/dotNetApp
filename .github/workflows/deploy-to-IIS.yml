@@ -31,7 +31,7 @@ jobs:
       - name: Create a Artifact using from the public folder
         uses: actions/upload-artifact@v3
         with:
-          name: public-folder-to-be-deployed-to-iis
+          name: public folder
           path: public
 
       - name: Copy folder from work directory to wwwroot
@@ -40,14 +40,18 @@ jobs:
           iisreset /stop
           Copy-Item ./public/* C:/inetpub/wwwroot/ -Recurse -Force
           iisreset /start
-      #- name: copy public folder in Jfrog
-      #  action: "Upload a file to Artifactory" {
-  #uses = "greenido/upload-to-artifactory@master"
-  #secrets = ["USERNAME","PASSWORD"]
-  #args = {ARTIFACTORY_URL = "https://sunartifact.jfrog.io/artifactory/default-docker-virtual/",
-  #REPO_NAME = "public folder",
-  #FILE_PATH = "public",
-  #FILE_NAME = "*"}}
+          
+  JfrogArtifact-Upload:
+      runs-on: iis-test-runner
+      needs: deploy
+      steps:
+      - name: run jfrog cli in VM
+        run: powershell "Start-Process -Wait -Verb RunAs powershell '-NoProfile iwr https://releases.jfrog.io/artifactory/jfrog-cli/v2-jf/[RELEASE]/jfrog-cli-windows-amd64/jf.exe -OutFile $env:SYSTEMROOT\system32\jf.exe'" ; jf setup
       
+      - name: check Jfrog version & config
+        run:  jf -v
+  
+      
+        
 
                
