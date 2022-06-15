@@ -47,9 +47,6 @@ jobs:
       steps:
       - name: create zip folder
         run: Compress-Archive -LiteralPath C:\Users\actions-runner\_work\dotNetApp\dotNetApp\public -DestinationPath C:\Users\Sunandas1\Downloads\public.zip -Force
-        
-      - name: run jfrog cli in VM
-        run: powershell "Start-Process -Wait -Verb RunAs powershell '-NoProfile iwr https://releases.jfrog.io/artifactory/jfrog-cli/v2-jf/[RELEASE]/jfrog-cli-windows-amd64/jf.exe -OutFile $env:SYSTEMROOT\system32\jf.exe'" ; jf setup
       
       - name: check Jfrog version & config
         run:  jf -v
