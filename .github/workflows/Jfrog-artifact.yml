@@ -42,8 +42,12 @@ jobs:
       
       - name: Upload to Artifact
         run: curl -H "X-JFrog-Art-Api:${{ secrets.jfrogkey }}" -T public.zip "https://sunartifact.jfrog.io/artifactory/sunartifact-generic-local/public-$GITHUB_RUN_NUMBER.zip"
-        
       
+      - name: download file from Jfrog
+        run:  curl -H "X-JFrog-Art-Api:${{  secrets.jfrogkey  }}" -O "https://sunartifact.jfrog.io/artifactory/sunartifact-generic-local/public-$GITHUB_RUN_NUMBER.zip"
+      
+      - name: validate download
+        run: ls -la
   
       
         
