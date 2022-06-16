@@ -53,7 +53,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Jfrog zip file
-          path: public-${{ GITHUB_RUN_NUMBER }}.zip
+          path: public-$githubRunnerId.zip
         
 
                
