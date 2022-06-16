@@ -2,6 +2,9 @@ name: deploy folder in Jfrog
 
 on:
   workflow_dispatch:
+
+env:
+  githubRunnerId : $GITHUB_RUN_NUMBER
   
 jobs:
   build:
@@ -38,7 +41,7 @@ jobs:
         run: ls -l public.zip
       
       - name: Upload to Artifact
-        run: curl -H "X-JFrog-Art-Api:${{secrets.jfrogkey}}" -T public.zip "https://sunartifact.jfrog.io/artifactory/sunartifact-generic-local/public-$GITHUB_RUN_ID"
+        run: curl -H "X-JFrog-Art-Api:${{ secrets.jfrogkey }}" -T public.zip "https://sunartifact.jfrog.io/artifactory/sunartifact-generic-local/public-$githubRunnerId"
         
       
   
