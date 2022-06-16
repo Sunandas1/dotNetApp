@@ -52,8 +52,8 @@ jobs:
       - name: Create a Artifact from Jfrog downloaded file 
         uses: actions/upload-artifact@v3
         with:
-          name: Jfrog zip file
-          path: public-$githubRunnerId.zip
+          name: public-$githubRunnerId.zip
+          path: DotNetAPP
         
 
                
